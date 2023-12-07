@@ -24,10 +24,13 @@ jobs:
       - name: Build
         run: npm --prefix client run build
 
+      - name: Copy build artifacts
+        run: cp -r client/dist/* ./client/src/firebase/
+
       - name: Deploy to Firebase Hosting
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_CALL_FOR_HELP_FC402 }}'
           channelId: live
           projectId: call-for-help-fc402
